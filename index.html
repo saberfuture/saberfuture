@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <title>OKX策略收益模拟工具</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<form>
+    <fieldset>
+        <legend>K线数据查询</legend>
+        <label>交易对：<input type="text" id="symbolSelect" value="BTC">USDT</label><br><br>
+
+        <label>K线级别：
+            <select id="intervalSelect">
+                <option value="1m">1分钟</option>
+                <option value="3m">3分钟</option>
+                <option value="5m">5分钟</option>
+                <option value="15m" selected>15分钟</option>
+                <option value="30m">30分钟</option>
+                <option value="1h">1小时</option>
+                <option value="2h">2小时</option>
+                <option value="4h">4小时</option>
+                <option value="6h">6小时</option>
+                <option value="8h">8小时</option>
+                <option value="12h">12小时</option>
+                <option value="1d">1天</option>
+                <option value="3d">3天</option>
+                <option value="1w">1周</option>
+                <option value="1M">1月</option>
+            </select>
+        </label><br><br>
+
+        <label>开始时间：
+            <input type="datetime-local" id="startTime" value="2023-03-11T00:00:00">
+        </label><br><br>
+
+        <label>结束时间：
+            <input type="datetime-local" id="endTime" value="2023-04-10T00:00:00">
+        </label><br><br>
+
+        <label>K线级别越细，模拟计算更准确，但也意味着请求的数据越多。不要频繁请求K线数据，容易导致IP被封。<br>
+            每次查询的K线会缓存到浏览器本地，修改策略参数后不需要重新请求，如果需要重新查询，刷新重新加载页面。</label><br><br>
+
+        <button type="button" id="queryBtn">查询</button>
+    </fieldset>
+</form>
+
+<form>
+    <fieldset>
+        <legend>OKX马丁策略收益</legend>
+        <label>仓位方向：
+            <select id="positionSideSelect">
+                <option value="long">做多</option>
+                <option value="short">做空</option>
+            </select>
+        </label><br><br>
+        <label>仓位杠杆：<input type="number" id="leverage" value="17"></label><br><br>
+        <label>首保证金：<input type="number" id="firstAmount" value="200"></label><br><br>
+        <label>加保证金：<input type="number" id="baseAmount" value="92"></label><br><br>
+        <label>触发加仓：<input type="number" id="triggerDrop" value="0.0039"></label><br><br>
+        <label>触发止盈：<input type="number" id="stopProfit" value="0.017"></label><br><br>
+        <label>加价倍数：<input type="number" id="priceMultiplier" value="1"></label><br><br>
+        <label>加金倍数：<input type="number" id="additionMultiplier" value="1.1"></label><br><br>
+        <label>加仓次数：<input type="number" id="maxAdditionCount" value="13"></label><br><br>
+        <label>扣手续费：<input type="number" id="tradeFee" value="0.0005"></label><br><br>
+
+        <button type="button" id="computeBtn">计算收益</button>
+    </fieldset>
+</form>
+
+<div id="klineDialog">
+    <button type="button" id="downloadKlineBtn">下载</button>
+    <button type="button" id="closeKlineBtn">关闭</button>
+    <hr>
+    <div id="klineTable"></div>
+</div>
+
+<div id="computeMartingaleDialog">
+    <button type="button" id="closeMartingaleBtn">关闭</button>
+    <hr>
+    <label id="computeMartingaleLabel"></label>
+    <hr>
+    <div id="computeMartingaleChart"></div>
+</div>
+
+<script src="app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/echarts.min.js"></script>
+</body>
+</html>
