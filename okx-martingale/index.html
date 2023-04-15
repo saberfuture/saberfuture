@@ -42,7 +42,8 @@
         <label>K线级别越细，模拟计算更准确，但也意味着请求的数据越多。不要频繁请求K线数据，容易导致IP被封。<br>
             每次查询的K线会缓存到浏览器本地，修改策略参数后不需要重新请求，如果需要重新查询，刷新重新加载页面。<br>
             虽然测试的是OKX的马丁格尔策略，但用的是币安的K线数据，因为OKX只能查询近期的历史K线，更久远的数据无法查询。<br>
-            因为目前币安的IP限制，所以梯子不能是美国的，建议日本或者韩国IP查询数据。
+            因为目前币安的IP限制，所以梯子不能是美国的，建议日本或者韩国IP查询数据。<br>
+            币安API：https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=15m
         </label><br><br>
 
         <button type="button" id="queryBtn">查询</button>
